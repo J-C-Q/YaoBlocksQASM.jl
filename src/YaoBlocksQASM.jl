@@ -2,7 +2,7 @@ module YaoBlocksQASM
 
 export convert_to_qasm
 
-using YaoBlocks
+using Yao.YaoBlocks
 
 include("qasm.jl")
 
