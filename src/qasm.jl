@@ -1,7 +1,7 @@
 using OpenQASM.Types
 using OpenQASM.RBNF: Token
 
-#todo support custom yao gates to qasm 
+#todo support custom yao gates to qasm
 
 """
     convert_to_qasm(qc, ncreg)
@@ -10,9 +10,9 @@ Parses an `AbstractBlock` into code based on the `OpenQASM` spec
 
 - `qc`: A `ChainBlock`(circuit that is to be run).
 - `ncreg` (optional) : Number of classical registers
-While performing operations like measuring, one can input desired number of classical regs(each size equal to number of qubits). Defaults to 1.  
+While performing operations like measuring, one can input desired number of classical regs(each size equal to number of qubits). Defaults to 1.
 """
-function convert_to_qasm(qc::AbstractBlock{N}, ncreg::Int = 1) where {N}
+function convert_to_qasm(qc::AbstractBlock{N}, ncreg::Int=1) where {N}
     prog = generate_prog(qc, ncreg)
     MainProgram(v"2", prog)
 end
@@ -140,6 +140,6 @@ end
 
 sublocs(subs, locs) = [locs[i] for i in subs]
 
-function basicstyle(blk::AbstractBlock)
-    YaoBlocks.Optimise.simplify(blk, rules = [YaoBlocks.Optimise.to_basictypes])
+function basicstyle(blk::AbstractBlock{N}) where {N}
+    YaoBlocks.Optimise.simplify(blk, rules=[YaoBlocks.Optimise.to_basictypes])
 end
